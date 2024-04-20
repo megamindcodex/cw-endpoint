@@ -10,6 +10,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://http://localhost:4000",
+  "https://cw-client.netlify.app",
 ];
 
 app.use(
