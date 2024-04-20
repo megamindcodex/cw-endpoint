@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
 //connect to mongodb database
-const dbURI = process.env.DB_URI;
+const dbURI = process.env.MONGO_DB_URI;
 
 const connectDB = async () => {
   try {
