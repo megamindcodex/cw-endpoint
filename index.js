@@ -9,7 +9,7 @@ const app = express();
 // Specify multiple origins in an array
 const allowedOrigins = [
   "http://localhost:5173",
-  "http://http://localhost:4000",
+  "http://localhost:4000",
   "https://cw-client.netlify.app",
 ];
 
