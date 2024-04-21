@@ -6,11 +6,12 @@ const { get_chats } = require("../controllers/getCahts");
 
 router.get("/get_chats", authorize, async (req, res) => {
   try {
-    const users = ["emmanvictor", "codex001"];
-    // console.log(users);
+    // const users = ["codex001", "emmanvictor"];
+    const users = req.query.users;
+    console.log(users);
 
     const chats = await get_chats(users);
-    console.log(chats);
+    // console.log(chats);
 
     if (chats) {
       res.status(200).json(chats);
