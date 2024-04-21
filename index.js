@@ -61,7 +61,5 @@ app.use("/api", saveMsgRoute);
 app.use("/api", getChatsRoute);
 
 connectDB().then(() => {
-  app.listen(PORT, () =>
-    console.log(`serve runing on port http://localhost:${PORT}`)
-  );
+  app.listen(PORT, () => console.log(`serve runing on port ${PORT}`));
 });
