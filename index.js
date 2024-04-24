@@ -9,6 +9,7 @@ const app = express();
 // Specify multiple origins in an array
 const allowedOrigins = [
   "http://localhost:5173",
+  "http://localhost:5174",
   "http://localhost:4000",
   "https://cw-client.netlify.app",
 ];
@@ -52,6 +53,8 @@ const loginUserRoute = require("./src/routes/loginRoute");
 const getUserDataRoute = require("./src/routes/getUserDataRoute");
 const saveMsgRoute = require("./src/routes/saveMsgRoute");
 const getChatsRoute = require("./src/routes/getChatsRoute");
+const getConvoRoute = require("./src/routes/getConvoRoute");
+const getAllUsersRoute = require("./src/routes/getAllUsersRoute");
 
 // use Route
 app.use("/api", registerUserRoute);
@@ -59,6 +62,8 @@ app.use("/api", loginUserRoute);
 app.use("/api", getUserDataRoute);
 app.use("/api", saveMsgRoute);
 app.use("/api", getChatsRoute);
+app.use("/api", getConvoRoute);
+app.use("/api", getAllUsersRoute);
 
 connectDB().then(() => {
   app.listen(PORT, () => console.log(`serve runing on port ${PORT}`));

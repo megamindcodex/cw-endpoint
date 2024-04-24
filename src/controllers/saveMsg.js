@@ -28,7 +28,7 @@ const save_message_to_db = async (receiverName, message, userId) => {
         chatRoomId: conversation._id,
       });
       receiver.chatRooms.push({
-        users: [user.userName, receiverName],
+        users: [receiverName, user.userName],
         chatRoomId: conversation._id,
       });
     } else {

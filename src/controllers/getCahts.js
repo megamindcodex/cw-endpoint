@@ -2,8 +2,16 @@ const Conversation = require("../models/conversation");
 
 const get_chats = async (users) => {
   try {
-    const conversation = await Conversation.findOne({ users: users });
+    // Try finding conversation with the original order of users
+    let conversation = await Conversation.findOne({ users: users });
 
+    // If no conversation found, try finding conversation with reversed order of users
+    if (!conversation) {
+      const reversedUsers = [...users].reverse(); // Reverse the order of users
+      conversation = await Conversation.findOne({ users: reversedUsers });
+    }
+
+    // If conversation still not found, throw an error
     if (!conversation) {
       throw new Error(`No conversation found for users ${users}`);
     } else {
