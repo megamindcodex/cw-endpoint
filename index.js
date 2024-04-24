@@ -12,6 +12,7 @@ const allowedOrigins = [
   "http://localhost:5174",
   "http://localhost:4000",
   "https://cw-client.netlify.app",
+  "https://cw-admin-client.netlify.app",
 ];
 
 app.use(
