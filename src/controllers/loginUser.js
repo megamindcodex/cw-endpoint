@@ -24,7 +24,7 @@ const loginUser = async (email, password) => {
       //   returns token
       return token;
     } else {
-      console.error("Passwords do not match", err, err.message);
+      console.error("Passwords do not match");
       return null;
     }
   } catch (err) {
