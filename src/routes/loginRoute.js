@@ -8,7 +8,9 @@ router.post("/login", authenticateUser, (req, res) => {
   // The authencation middleware has already handled the authentication
   // and attatched the token to the request object.
 
-  res.status(200).json({ token: req.token });
+  if (req.token) {
+    res.status(200).json({ token: req.token });
+  }
 });
 
 module.exports = router;

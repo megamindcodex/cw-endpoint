@@ -7,7 +7,7 @@ const { getUserData } = require("../controllers/getUserData");
 router.get("/fetchUserData", authorize, async (req, res) => {
   try {
     const user = await getUserData(req.userId);
-    console.log(req.userId);
+    // console.log(req.userId);
 
     if (!user) {
       res.status(404).json({ error: "User not found" });

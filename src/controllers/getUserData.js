@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 const getUserData = async (userId) => {
   try {
-    console.log(userId);
+    // console.log(userId);
     const user = await User.findById(userId);
     return user;
   } catch (err) {

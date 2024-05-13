@@ -10,6 +10,7 @@ const registerUser = async (name, userName, email, password) => {
       password: password,
     };
     // console.log(registerData);
+
     const user = await User.create(registerData);
 
     if (user) {

@@ -27,8 +27,10 @@ app.use(
       }
       return callback(null, true);
     },
-    methods: ["Get", "Post", "Put", "Delete"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["content-type", "Authorization"],
+    // Handle preflight requests
+    // optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   })
 );
 
@@ -56,6 +58,7 @@ const saveMsgRoute = require("./src/routes/saveMsgRoute");
 const getChatsRoute = require("./src/routes/getChatsRoute");
 const getConvoRoute = require("./src/routes/getConvoRoute");
 const getAllUsersRoute = require("./src/routes/getAllUsersRoute");
+const changeHasReadRoute = require("./src/routes/changeHasReadRoute");
 
 // use Route
 app.use("/api", registerUserRoute);
@@ -65,6 +68,7 @@ app.use("/api", saveMsgRoute);
 app.use("/api", getChatsRoute);
 app.use("/api", getConvoRoute);
 app.use("/api", getAllUsersRoute);
+app.use("/api", changeHasReadRoute);
 
 connectDB().then(() => {
   app.listen(PORT, () => console.log(`serve runing on port ${PORT}`));

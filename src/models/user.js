@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema({
   chatRooms: [
     {
       users: [],
+      hasRead: Boolean,
     },
   ],
 });

@@ -6,9 +6,12 @@ const { authenticateNewUser } = require("../middleware/authenticateNewUser");
 
 //use the imported authenticateNewUser middleware to authenticate new users
 router.post("/register", authenticateNewUser, (req, res) => {
-  const userId = req.userId;
-
-  res.status(201).json({ token: req.token });
+  const token = req.token;
+  if (!token) {
+    return res.status(401).json({ error: "Authentication failed" });
+  } else {
+    res.status(201).json({ token: token });
+  }
 });
 
 module.exports = router;

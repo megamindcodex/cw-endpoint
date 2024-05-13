@@ -25,10 +25,12 @@ const save_message_to_db = async (receiverName, message, userId) => {
       conversation = await Conversation.create(newConversation);
       user.chatRooms.push({
         users: [user.userName, receiverName],
+        hasRead: true,
         chatRoomId: conversation._id,
       });
       receiver.chatRooms.push({
         users: [receiverName, user.userName],
+        hasRead: false,
         chatRoomId: conversation._id,
       });
     } else {

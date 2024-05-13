@@ -7,7 +7,7 @@ const { save_message_to_db } = require("../controllers/saveMsg");
 router.post("/saveMessage", authorize, async (req, res) => {
   try {
     const { receiver, message } = req.body;
-    console.log(receiver, message);
+    // console.log(receiver, message);
     const userId = req.userId;
     const result = await save_message_to_db(receiver, message, userId);
 

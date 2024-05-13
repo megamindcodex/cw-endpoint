@@ -8,7 +8,7 @@ router.get("/get_chats", authorize, async (req, res) => {
   try {
     // const users = ["codex001", "emmanvictor"];
     const users = req.query.users;
-    console.log(users);
+    // console.log(users);
 
     const chats = await get_chats(users);
     // console.log(chats);

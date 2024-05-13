@@ -14,7 +14,7 @@ const get_convo = async (userId) => {
       return false;
     }
 
-    console.log(conversations);
+    // console.log(conversations);
     return conversations;
   } catch (err) {
     console.error("Error getting user chatRooms");

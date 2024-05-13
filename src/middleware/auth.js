@@ -5,6 +5,7 @@ const authorize = async (req, res, next) => {
   try {
     const authHeader = req.header("Authorization");
 
+    // console.log(authHeader);
     if (!authHeader) {
       console.log("Access Denied. No token provided");
       return res
@@ -27,6 +28,7 @@ const authorize = async (req, res, next) => {
     //   return res.status(401).send({ error: "Access Denied. Unauthorized" });
     // }`
     req.userId = decoded.id;
+    // console.log(decoded.id);
     next();
   } catch (err) {
     res.status(500).send({ eror: "Internal Server Error" });
