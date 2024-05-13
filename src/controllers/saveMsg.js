@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const Conversation = require("../models/conversation");
 
-const save_message_to_db = async (receiverName, message, userId) => {
+const save_message_to_db = async (receiverName, message, timeStamp, userId) => {
   try {
     const user = await User.findById(userId).populate();
     const receiver = await User.findOne({ userName: receiverName }).populate();
@@ -20,7 +20,9 @@ const save_message_to_db = async (receiverName, message, userId) => {
     if (!conversation) {
       const newConversation = {
         users: [user.userName, receiverName],
-        messages: [{ sender: user.userName, receiver: receiverName, message }],
+        messages: [
+          { sender: user.userName, receiver: receiverName, message, timeStamp },
+        ],
       };
       conversation = await Conversation.create(newConversation);
       user.chatRooms.push({
@@ -38,6 +40,7 @@ const save_message_to_db = async (receiverName, message, userId) => {
         sender: user.userName,
         receiver: receiverName,
         message,
+        timeStamp,
       });
     }
 

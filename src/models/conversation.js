@@ -17,8 +17,8 @@ const conversationSchema = new mongoose.Schema({
         required: true,
       },
       timeStamp: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        required: true,
       },
     },
   ],
