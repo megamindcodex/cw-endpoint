@@ -46,7 +46,7 @@ const save_message_to_db = async (receiverName, message, timeStamp, userId) => {
 
     await Promise.all([conversation.save(), user.save(), receiver.save()]);
 
-    return { receiverName, hasRead: false };
+    return receiverName;
   } catch (err) {
     console.error("Error saving message to db:", err.message);
     throw err; // Throw the error for consistent error handling
