@@ -1,19 +1,36 @@
 const express = require("express");
 const router = express.Router();
 const { authorize } = require("../middleware/auth");
-const { change_hasRead_to_true } = require("../controllers/changeHasRead");
+const {
+  change_hasRead_to_true,
+  change_hasRead_to_false,
+} = require("../controllers/changeHasRead");
 
-router.put("/change_hasRead_to_true", authorize, async (req, res) => {
+router.put("/toggle_hasRead", authorize, async (req, res) => {
   try {
-    const { receiverName } = req.body;
+    const { receiverName, condition } = req.body;
     const userId = req.userId;
-    console.log(receiverName, userId);
+    // console.log(receiverName, userId, condition);
 
-    const hasRead = await change_hasRead_to_true(userId, receiverName);
-
-    if (hasRead) {
-      res.status(200).json({ hasRead: true });
+    if (condition === true) {
+      const hasRead = await change_hasRead_to_true(
+        userId,
+        receiverName,
+        condition
+      );
+      res.status(200).json({ hasRead: hasRead });
+    } else {
+      const hasRead = await change_hasRead_to_false(
+        userId,
+        receiverName,
+        condition
+      );
+      res.status(200).json({ hasRead: hasRead });
     }
+
+    // if (hasRead === true) {
+    //   res.status(200).json({ hasRead: true });
+    // }
   } catch (err) {
     res.status(500).json({ error: "Internal Server Error", err });
     console.error("Internal Server Error", err, err.message);

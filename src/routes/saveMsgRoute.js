@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const axios = require("axios");
+const { socketIo_endpoint } = require("../constant/endpoint");
 
 const { authorize } = require("../middleware/auth");
 const { save_message_to_db } = require("../controllers/saveMsg");
@@ -15,13 +17,25 @@ router.post("/saveMessage", authorize, async (req, res) => {
       timeStamp,
       userId
     );
+    // console.log(result);
+
+    // Send data to web Hook
+    const feedback = await axios.post(
+      `${socketIo_endpoint}/webhook/new_message`,
+      result
+    );
+    if (feedback.status === 200) {
+      console.log(feedback.data.message);
+      // console.log(feedback.status.statusText);
+    }
 
     if (result) {
       res.status(200).json({ message: "save message success" });
     }
   } catch (err) {
-    res.status(500).send("interal server error:", err, err.message);
-    console.log("Error saving message to db:", err, err.message);
+    res.status(500).send("interal server error");
+    console.log("interal server error:", err.message);
+    // console.log("Error saving message to db:", err, err.message);
   }
 });
 
