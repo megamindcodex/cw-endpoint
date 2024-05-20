@@ -15,7 +15,6 @@ const change_hasRead_to_true = async (userId, receiverName, condition) => {
     }
 
     const userName = user.userName;
-    // console.log(user);
     const chatRooms = user.chatRooms;
 
     // console.log(chatRooms);

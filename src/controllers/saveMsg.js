@@ -28,12 +28,10 @@ const save_message_to_db = async (receiverName, message, timeStamp, userId) => {
       user.chatRooms.push({
         users: [user.userName, receiverName],
         hasRead: true,
-        chatRoomId: conversation._id,
       });
       receiver.chatRooms.push({
         users: [receiverName, user.userName],
         hasRead: false,
-        chatRoomId: conversation._id,
       });
     } else {
       conversation.messages.push({
@@ -42,13 +40,38 @@ const save_message_to_db = async (receiverName, message, timeStamp, userId) => {
         message,
         timeStamp,
       });
+      const userChatMessage = user.chatRooms.find(
+        (chatRoom) =>
+          chatRoom.users.includes(user.userName) &&
+          chatRoom.users.includes(receiver.userName)
+      );
+      const receiverChatMessage = receiver.chatRooms.find(
+        (chatRoom) =>
+          chatRoom.users.includes(user.userName) &&
+          chatRoom.users.includes(receiver.userName)
+      );
+
+      userChatMessage.hasRead = true;
+      receiverChatMessage.hasRead = false;
     }
 
-    await Promise.all([conversation.save(), user.save(), receiver.save()]);
+    const userChatMessage = user.chatRooms.find(
+      (chatRoom) =>
+        chatRoom.users.includes(user.userName) &&
+        chatRoom.users.includes(receiver.userName)
+    );
+    const receiverChatMessage = receiver.chatRooms.find(
+      (chatRoom) =>
+        chatRoom.users.includes(user.userName) &&
+        chatRoom.users.includes(receiver.userName)
+    );
 
+    await Promise.all([conversation.save(), user.save(), receiver.save()]);
+    console.log(`${user.userName} hasRead ${userChatMessage.hasRead}`);
+    console.log(`${receiverName} hasRead ${receiverChatMessage.hasRead}`);
     return { receiverName };
   } catch (err) {
-    console.error("Error saving message to db:", err.message);
+    console.error("Error saving message to db:", err.message, err);
     throw err; // Throw the error for consistent error handling
   }
 };

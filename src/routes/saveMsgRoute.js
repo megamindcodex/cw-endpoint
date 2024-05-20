@@ -11,7 +11,7 @@ router.post("/saveMessage", authorize, async (req, res) => {
     const { receiver, message, timeStamp } = req.body;
     // console.log(receiver, message);
     const userId = req.userId;
-    const result = await save_message_to_db(
+    const receiverName = await save_message_to_db(
       receiver,
       message,
       timeStamp,
@@ -22,14 +22,14 @@ router.post("/saveMessage", authorize, async (req, res) => {
     // Send data to web Hook
     const feedback = await axios.post(
       `${socketIo_endpoint}/webhook/new_message`,
-      result
+      receiverName
     );
     if (feedback.status === 200) {
       console.log(feedback.data.message);
       // console.log(feedback.status.statusText);
     }
 
-    if (result) {
+    if (receiverName) {
       res.status(200).json({ message: "save message success" });
     }
   } catch (err) {

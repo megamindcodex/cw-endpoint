@@ -13,14 +13,9 @@ router.put("/toggle_hasRead", authorize, async (req, res) => {
     // console.log(receiverName, userId, condition);
 
     if (condition === true) {
+      console.log(condition);
+      console.log(`Setting ${receiverName} hasRead to ${condition}`);
       const hasRead = await change_hasRead_to_true(
-        userId,
-        receiverName,
-        condition
-      );
-      res.status(200).json({ hasRead: hasRead });
-    } else {
-      const hasRead = await change_hasRead_to_false(
         userId,
         receiverName,
         condition
@@ -28,9 +23,16 @@ router.put("/toggle_hasRead", authorize, async (req, res) => {
       res.status(200).json({ hasRead: hasRead });
     }
 
-    // if (hasRead === true) {
-    //   res.status(200).json({ hasRead: true });
-    // }
+    if (condition === false) {
+      console.log(condition);
+      console.log(`Setting ${receiverName} hasRead to ${condition}`);
+      const hasRead = await change_hasRead_to_false(
+        userId,
+        receiverName,
+        condition
+      );
+      res.status(200).json({ hasRead: hasRead });
+    }
   } catch (err) {
     res.status(500).json({ error: "Internal Server Error", err });
     console.error("Internal Server Error", err, err.message);
