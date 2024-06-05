@@ -13,6 +13,7 @@ const allowedOrigins = [
   "http://localhost:4000",
   "https://halleberry-membership.netlify.app",
   "https://cw-admin-client.netlify.app",
+  "https://bts-membership.netlify.app",
 ];
 
 app.use(
