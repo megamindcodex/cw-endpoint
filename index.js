@@ -11,7 +11,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:4000",
-  "https://adele-membership.netlify.app",
+  "https://halleberry-membership.netlify.app",
   "https://cw-admin-client.netlify.app",
 ];
 
