@@ -14,11 +14,11 @@ const authenticateUser = async (req, res, next) => {
     if (!user) {
       isMatch = false;
       console.log("User not found");
-      return res.status(409).json({ error: "User not found" });
+      return res.status(401).json({ error: "User not found" });
     } else if (password !== user.password) {
       isMatch = false;
       console.log("Incorrect password");
-      return res.status(409).json({ error: "Incorrect password" });
+      return res.status(401).json({ error: "Incorrect password" });
     }
 
     if (isMatch) {
